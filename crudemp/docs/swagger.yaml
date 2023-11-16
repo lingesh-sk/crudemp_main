@@ -1,0 +1,86 @@
+definitions:
+  main.Employee:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /employees:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/main.Employee'
+            type: array
+      summary: Get a list of employees
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Employee Object
+        in: body
+        name: employee
+        required: true
+        schema:
+          $ref: '#/definitions/main.Employee'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/main.Employee'
+      summary: Create a new employee
+  /employees/{id}:
+    delete:
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      responses: {}
+      summary: Delete an employee by ID
+    get:
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.Employee'
+      summary: Get an employee by ID
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Employee ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Employee Object
+        in: body
+        name: employee
+        required: true
+        schema:
+          $ref: '#/definitions/main.Employee'
+      produces:
+      - application/json
+      responses: {}
+      summary: Update an existing employee
+swagger: "2.0"
